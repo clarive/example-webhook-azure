@@ -63,8 +63,7 @@ To run this example you can create an instance in our free cloud. That will give
 
     <img src="https://clarive.com/wp-content/uploads/vars.png" alt="Azure vars" width="1455" height="284" class="size-full wp-image-13734" /> Your secret vars that allow to login in your Azure
 7. Clone this repo in your local workspace, checkout the actual branch and modify your <em>.clarive.yml</em> with the webservice.
-
-    ```yaml
+```yaml
 /create_azure_vm:
     image: microsoft/azure-cli #docker image to run az commands
     do:
@@ -78,18 +77,17 @@ To run this example you can create an instance in our free cloud. That will give
             - result =:"Upps! something went wrong, review your azure instance."
         - web_response:
             body: ${result} 
-   ```
+```
 8. Push the changes (after commiting them, obviously) into your brach, then you have to take your __topic to PROD environment__ where your branch will be __merged in master__ or do it manually.
 
 9. Your defined webservice will be available so call it with your browser or in your command line using "curl".
 
-   ```console
+```console
 curl https://<your_cloud_instance>.clarive.io/rule/json/<your_project>/<your_repo>/create_azure_vm?api_key=<your_user_api_key>
-   ```
+```
 
 10. Finally, you can see your VM created in your Azure instance.
-
-   [caption id="attachment_13754" align="alignnone" width="799"]<img src="https://clarive.com/wp-content/uploads/azure_vm_created.png" alt="" width="875" height="399" class="alignnone size-full wp-image-13754" />Your VM created in Azure with a Clarive webhook[/caption]
+<img src="https://clarive.com/wp-content/uploads/azure_vm_created.png" alt="" width="875" height="399" class="alignnone size-full wp-image-13754" />Your VM created in Azure with a Clarive webhook
 
 That's it. You've just created your first DevOps webservice in Clarive :)
 
