@@ -1,0 +1,13 @@
+/create_azure_vm:
+image: microsoft/azure-cli #docker image to run az commands
+do:
+    - myoutput = shell: |
+          az login --service-principal -u {{ ctx.var('az-service-principal') }}  --password {{ ctx.var('az-password') }}  --tenant {{ ctx.var('az-tenant') }}
+          az vm create --resource-group <your_resource_group> --name myVM --image UbuntuLTS --generate-ssh-keys
+    - if "{{ myoutput.rc == 0 }}"
+      then: 
+        - result =: "VM created succesfully!"
+      else:
+        - result =:"Upps! something went wrong, review your azure instance."
+    - web_response:
+        body: ${result}
