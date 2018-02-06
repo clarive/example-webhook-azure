@@ -1,36 +1,4 @@
-So now we can write webservices with Clarive rulebooks. We call them _webhooks_, but they are actually __inbound__.
-
-Let me explain. Let's start with the problem at hand.
-
-### The Problem at hand
-
-With Clarive you can write your automation as rulebook files. (You can also write them visually with Clarive EE, but that's another story.) Rulebooks can do wonderful things, like automating your pipeline: building, testing and deploying apps. They can also be used to __provision__ your infrastructure (think cloud instance or DB) and can be triggered by many different rules, like a topic modification or a branch being pushed. They can also be scheduled to run on a cron.
-
-But what if you want to trigger them from an outside event? Say when a user opens an issue on your issue tracker, or someone pushes something to a repository somewhere? That's when we wanted to trigger a rule in our rulebook. To do that you can call into Clarive. But instead of running a generic Clarive API that calls a rulebook, we wanted to expose __meaningful urls__ that would make more sense of 
-
-### What is a Rulebook
-
-Rulebook is a file (or set of files) checked into a Git repository in your Clarive instance. It all starts with the `.clarive.yml` file.
-
-Your rulebook will contain _rules_. Rules can be `build`, `test`, `deploy`, or events like `topic_modify` or `repository_update`. And then they can be webhook rules. Webhook rules are any events that start with a `/` slash character. The event name will become an __url fragment__ to be called into.
-
-Webhook rules behave like exposed webservices right into your instance, running within your repository.
-
-Here's an example:
-
-```yaml
-/hello_world:
-    - echo: running the hello world webhook
-   
-    # do some meaningful stuff here
-
-    - web_response:
-         # return something to the caller
-           
-```
-
-### Anatomy of a web call
-
+### Clarive Webhook
 When you call into a rule webhook introducing a url like this:
 <code>      https://{myclariveserver}/rule/json/{MyProject}/{MyRepo}/hello_world?api_key={my_user_api_key} </code>
 
@@ -90,7 +58,3 @@ curl https://<your_cloud_instance>.clarive.io/rule/json/<your_project>/<your_rep
 <img src="https://clarive.com/wp-content/uploads/azure_vm_created.png" alt="" width="875" height="399" class="alignnone size-full wp-image-13754" />Your VM created in Azure with a Clarive webhook
 
 That's it. You've just created your first DevOps webservice in Clarive :)
-
-<hr />
-<note>Get your free Clarive instance and create your own DevOps webhooks</note>
-<hr />
